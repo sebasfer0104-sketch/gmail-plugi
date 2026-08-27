@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "mcpServers": {
+    "gmail": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./server.js"],
+      "env": {},
+      "description": "MCP server stdio para Gmail: leer, buscar, enviar, responder y modificar correos via OAuth personal.",
+      "timeout": 60000
+    }
+  }
+}

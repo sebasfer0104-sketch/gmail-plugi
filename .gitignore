@@ -1,0 +1,23 @@
+# Secrets — never commit
+credentials.json
+token.json
+*.gmail-tokens.json
+
+# Node
+node_modules/
+package-lock.json
+
+# Logs y temporales
+*.log
+*.err
+npm-debug.log*
+.eslintcache
+.DS_Store
+Thumbs.db
+
+# Build artifacts (opcional: si querés re-bundlear local, ignorá el bundle)
+# server.js
+
+# Entornos
+.env
+.env.local

@@ -1,0 +1,11 @@
+{
+  "name": "gmail",
+  "version": "1.0.0",
+  "description": "Local MiniMax Plugin: read and send Gmail via OAuth",
+  "type": "commonjs",
+  "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  }
+}
