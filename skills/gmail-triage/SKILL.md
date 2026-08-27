@@ -1,36 +1,36 @@
 ---
 name: gmail-triage
-description: Ejecuta un workflow de triage de inbox en Gmail: lista correos no leidos, agrupa por remitente o etiqueta, resume y pregunta que hacer con cada grupo (responder, archivar, marcar leido, dejar).
+description: Run an inbox triage workflow on Gmail: list unread messages, group by sender or label, summarize, and ask the user what to do with each group (reply, archive, mark as read, leave for later).
 ---
 
 # Gmail Triage
 
-Workflow reutilizable para revisar la bandeja de entrada y decidir que hacer con cada grupo de correos.
+Reusable workflow to review the inbox and decide what to do with each group of emails.
 
-## Cuando usar
+## When to use
 
-Cuando el usuario dice cosas como:
-- "revisá mi inbox"
-- "qué tengo sin leer"
-- "triageá los correos de hoy"
-- "limpiá la bandeja"
+When the user says things like:
+- "review my inbox"
+- "what do I have unread"
+- "triage my emails"
+- "clean up my inbox"
 
-## Pasos
+## Steps
 
-1. Llamar `gmail_list_recent` con `unreadOnly: true` y `maxResults: 25`.
-2. Si hay menos de 25, llamar `gmail_search` con `query: "is:unread newer_than:7d"` para traer el resto de la semana.
-3. Agrupar los stubs por `from` (dominio) y detectar hilos (mismo `threadId`).
-4. Mostrar al usuario un resumen corto: cuantos correos no leidos, de cuantos remitentes distintos, y los 3-5 mas importantes (por snippet).
-5. Preguntar al usuario que accion tomar por grupo:
-   - Responder (llamar `gmail_get_message` para ver el contenido, despues `gmail_reply`)
-   - Marcar como leido (llamar `gmail_modify` con `markRead: true`)
-   - Archivar (llamar `gmail_modify` con `removeLabelIds: ["INBOX"]`)
-   - Dejar para despues (no hacer nada)
-6. Ejecutar las acciones confirmadas y reportar resumen final.
+1. Call `gmail_list_recent` with `unreadOnly: true` and `maxResults: 25`.
+2. If there are fewer than 25, call `gmail_search` with `query: "is:unread newer_than:7d"` to fetch the rest of the week.
+3. Group the stubs by `from` (domain) and detect threads (same `threadId`).
+4. Show the user a short summary: how many unread emails, how many distinct senders, and the top 3-5 most important (by snippet).
+5. Ask the user what action to take by group:
+   - Reply (call `gmail_get_message` to see the content, then `gmail_reply`)
+   - Mark as read (call `gmail_modify` with `markRead: true`)
+   - Archive (call `gmail_modify` with `removeLabelIds: ["INBOX"]`)
+   - Leave for later (do nothing)
+6. Execute the confirmed actions and report the final summary.
 
-## Reglas
+## Rules
 
-- NO responder correos sin que el usuario confirme el cuerpo del mensaje.
-- NO archivar correos de remitentes que el usuario no haya marcado como "promociones" o "spam" antes.
-- Si una accion falla con 429 (rate limit), esperar 5 segundos y reintentar una vez.
-- Si una accion falla con 401, el token expiro: avisar al usuario que vuelva a autorizar.
+- Do NOT reply to emails without the user confirming the body of the message.
+- Do NOT archive emails from senders the user has not previously marked as "promotions" or "spam".
+- If an action fails with 429 (rate limit), wait 5 seconds and retry once.
+- If an action fails with 401, the token expired: tell the user to re-authorize.
