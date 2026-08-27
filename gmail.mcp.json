@@ -4,10 +4,11 @@
     "gmail": {
       "type": "stdio",
       "command": "node",
-      "args": ["./server.js"],
+      "args": ["./server.mjs"],
       "env": {},
       "description": "MCP server stdio para Gmail: leer, buscar, enviar, responder y modificar correos via OAuth personal.",
       "timeout": 60000
     }
   }
 }
+
