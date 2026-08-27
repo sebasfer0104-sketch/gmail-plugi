@@ -1,5 +1,5 @@
 ---
-name: gmail-triage
+name: gmail
 description: Run an inbox triage workflow on Gmail: list unread messages, group by sender or label, summarize, and ask the user what to do with each group (reply, archive, mark as read, leave for later).
 ---
 
